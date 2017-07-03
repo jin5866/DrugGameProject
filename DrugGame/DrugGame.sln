@@ -1,12 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrugGame", "DrugGame.csproj", "{4F2835D1-2FE7-8E60-CB6B-5EB738E97DCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F2835D1-2FE7-8E60-CB6B-5EB738E97DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F2835D1-2FE7-8E60-CB6B-5EB738E97DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F2835D1-2FE7-8E60-CB6B-5EB738E97DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F2835D1-2FE7-8E60-CB6B-5EB738E97DCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
