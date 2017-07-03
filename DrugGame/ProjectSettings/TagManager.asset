@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MapBlock
   - JoyStick
+  - DrugGen
   layers:
   - Default
   - TransparentFX

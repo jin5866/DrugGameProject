@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Assets\CameraMove.cs" />
     <Compile Include="Assets\JoyStick.cs" />
+    <Compile Include="Assets\MapManager.cs" />
     <Compile Include="Assets\PlayerControl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
