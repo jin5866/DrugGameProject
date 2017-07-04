@@ -168,7 +168,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
 --- !u!1 &214440637
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +277,7 @@ MonoBehaviour:
   - {fileID: 4000012050177740, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
   blockList: []
   mapSIze: 10
+  initDrug: 100
   blockSize: 30
 --- !u!1 &351861165
 GameObject:
@@ -511,7 +512,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!224 &955347101 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224000012012015620, guid: 188b810c1ea3dee48b62b4cec96df7f7,
@@ -620,7 +621,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 13
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -660,64 +661,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPosZ: -10
   moveRate: 0.1
---- !u!1001 &1501215370
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4000012050177740, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012050177740, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012050177740, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012050177740, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012050177740, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012050177740, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012050177740, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012050177740, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000011465714324, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_TagString
-      value: DrugGen
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000012590959988, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_TagString
-      value: DrugGen
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010580776306, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_TagString
-      value: DrugGen
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000012150237276, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-      propertyPath: m_TagString
-      value: DrugGen
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &1652365424
 Prefab:
   m_ObjectHideFlags: 0
@@ -896,7 +839,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!1 &2110219190
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,4 +918,4 @@ Transform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7

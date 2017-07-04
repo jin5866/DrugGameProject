@@ -7,7 +7,7 @@ using System.Collections;
  * 
  */
 public class PlayerControl : MonoBehaviour {
-
+    public int playerNum = 1;
     public float maxSpeed = 10.0f;
     private JoyStick joyStick;
 
