@@ -14,7 +14,7 @@ using System.Collections.Generic;
  
 public class MapManager : MonoBehaviour {
     
-    public float mapPosZ = 17.0f;
+    public float mapPosY = 0.0f;
     public Transform[] mapBlock;
 
     public List<GameObject> blockList;
@@ -47,7 +47,7 @@ public class MapManager : MonoBehaviour {
             for (int j = -mapSIze; j <= mapSIze; j++)
             {
                 GameObject newBlock = CreateOneBlock();
-                newBlock.transform.position = new Vector3(i * blockSize, j * blockSize, mapPosZ);
+                newBlock.transform.position = new Vector3(i * blockSize, mapPosY, j * blockSize);
             }
         }
 

@@ -19,7 +19,7 @@ public class PlayerControl : MonoBehaviour {
 	// Update is called once per frame
     // 키보드 입력은 테스트용.
 	void Update () {
-        transform.Translate(Vector3.up * maxSpeed * Time.deltaTime * joyStick.GetVerticalValue());
+        transform.Translate(-Vector3.forward * maxSpeed * Time.deltaTime * joyStick.GetVerticalValue());
         transform.Translate(-Vector3.right * maxSpeed * Time.deltaTime * joyStick.GetHorizontalValue());
     }
 }
