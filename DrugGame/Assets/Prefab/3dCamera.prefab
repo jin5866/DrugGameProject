@@ -111,8 +111,10 @@ MonoBehaviour:
   YRotatePerSize: 10000
   defaultXRotate: 0
   defaultYRotate: 65
-  YRotateMin: 10
+  YRotateMin: 20
   YRotateMax: 85
+  moveBuffer: 1
+  cameraPos: {x: 0, y: 0, z: 0}
 --- !u!124 &124701299904284556
 Behaviour:
   m_ObjectHideFlags: 1
