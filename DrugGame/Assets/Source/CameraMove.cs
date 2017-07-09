@@ -27,6 +27,8 @@ public class CameraMove : MonoBehaviour {
     public bool moveBuffer = true;
 
     public Vector3 cameraPos;
+    public Vector3 playerForward;
+    public Vector3 playerRight;
 
     private Transform player;
     
@@ -100,5 +102,7 @@ public class CameraMove : MonoBehaviour {
         cameraPosZ = Mathf.Cos(xRotateDegree) * horizonDis;
 
         cameraPos = new Vector3(cameraPosX, cameraPosY, cameraPosZ);
+        playerForward = new Vector3(-cameraPosX, 0, -cameraPosZ);
+        playerRight = new Vector3(-cameraPosZ, 0, cameraPosX);
     }
 }

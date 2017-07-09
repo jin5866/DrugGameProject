@@ -273,7 +273,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4799242163997288, guid: dd57fef19dbeb4948b31df98952b20e7, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.060806736
+      value: 0.060806733
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd57fef19dbeb4948b31df98952b20e7, type: 2}

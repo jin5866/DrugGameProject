@@ -107,14 +107,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraDistance: 26.457514
   moveRate: 0.1
-  xRotatePerSize: 10000
-  YRotatePerSize: 10000
+  xRotatePerSize: 20000
+  YRotatePerSize: 20000
   defaultXRotate: 0
   defaultYRotate: 65
   YRotateMin: 20
   YRotateMax: 85
   moveBuffer: 1
   cameraPos: {x: 0, y: 0, z: 0}
+  playerForward: {x: 0, y: 0, z: 0}
+  playerRight: {x: 0, y: 0, z: 0}
 --- !u!124 &124701299904284556
 Behaviour:
   m_ObjectHideFlags: 1
