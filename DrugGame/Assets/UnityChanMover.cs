@@ -120,7 +120,7 @@ public class UnityChanMover : MonoBehaviour,ICharacterMover {
 
         camMove = cameraObject.GetComponent<CameraMove>();
         //움직임 부자연스러운거 수정
-        camMove.moveBuffer = false;
+        //camMove.moveBuffer = false;
     }
 	
 	// Update is called once per frame

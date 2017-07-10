@@ -18,7 +18,7 @@ public class DrugObj : MonoBehaviour {
         if(other.tag == "Player")
         {
             transform.parent.GetComponent<DrugGen>().PlayerGetDrug(other.GetComponent<PlayerControl>().playerNum);
-            other.GetComponent<DrugInvetory>().GetUnknownDrug();
+            other.GetComponent<DrugInvetory>().GetDrug();
             Destroy(gameObject);
         }
     }
