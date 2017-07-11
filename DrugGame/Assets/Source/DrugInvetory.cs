@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+[RequireComponent(typeof(PlayerState))]
 public class DrugInvetory : MonoBehaviour {
     public GameObject uiPanel;
 
@@ -25,6 +27,8 @@ public class DrugInvetory : MonoBehaviour {
     private int lastDrug = Enum.GetValues(typeof(ItemType)).Length;
     private Inven[] inven;
     private Text[] itemCounter;
+
+    private PlayerState playerState;
     
     // Use this for initialization
     void Start () {
@@ -57,8 +61,8 @@ public class DrugInvetory : MonoBehaviour {
             */
         }
 
-        
-        
+
+        playerState = GetComponent<PlayerState>();
 	}
 	
 	// Update is called once per frame
@@ -132,6 +136,7 @@ public class DrugInvetory : MonoBehaviour {
         if(inven[type].num > 0)
         {
             inven[type].num--;
+            playerState.UseDrug((ItemType)type);
         }
         else
         {
