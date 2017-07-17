@@ -8,6 +8,9 @@ TagManager:
   - JoyStick
   - DrugGen
   - UiPanel
+  - UIManager
+  - GameManager
+  - Block
   layers:
   - Default
   - TransparentFX

@@ -78,26 +78,37 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AlarmBoard.cs" />
+    <Compile Include="Assets\Chibi Mummy\Misc\Scripts\CharMovement.cs" />
+    <Compile Include="Assets\Chibi Mummy\Misc\Scripts\buttonControl_script.cs" />
+    <Compile Include="Assets\GameManager.cs" />
+    <Compile Include="Assets\MenuManager.cs" />
+    <Compile Include="Assets\NPC.cs" />
+    <Compile Include="Assets\PlayerFollower.cs" />
     <Compile Include="Assets\PlayerState.cs" />
     <Compile Include="Assets\Source\CameraMove.cs" />
     <Compile Include="Assets\Source\DrugGen.cs" />
     <Compile Include="Assets\Source\DrugInvetory.cs" />
     <Compile Include="Assets\Source\DrugObj.cs" />
     <Compile Include="Assets\Source\DrugType.cs" />
+    <Compile Include="Assets\Source\Interface\ICharacterBuff.cs" />
     <Compile Include="Assets\Source\Interface\ICharacterMover.cs" />
     <Compile Include="Assets\Source\JoyStick.cs" />
     <Compile Include="Assets\Source\MapManager.cs" />
     <Compile Include="Assets\Source\MotionPanel.cs" />
     <Compile Include="Assets\Source\PlayerControl.cs" />
+    <Compile Include="Assets\UIManager.cs" />
     <Compile Include="Assets\UnityChan\Scripts\CameraController.cs" />
     <Compile Include="Assets\UnityChan\Scripts\FaceUpdate.cs" />
     <Compile Include="Assets\UnityChan\Scripts\IdleChanger.cs" />
     <Compile Include="Assets\UnityChan\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\UnityChan\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
+    <Compile Include="Assets\UnityChanBuff.cs" />
     <Compile Include="Assets\UnityChanMover.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Chibi Mummy\readme.txt" />
     <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
     <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
     <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />

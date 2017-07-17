@@ -1,4 +1,5 @@
 ﻿using Assets;
+using Assets.Source.Interface;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,14 +27,23 @@ public class PlayerState : MonoBehaviour {
     public Slider toleranceBar;
     public Slider healthBar;
 
+    public float debuffPoint = 30f;
+    public float buffPoint = 70f;
+
+
+    public MonoBehaviour characterBuff;
+
     [HideInInspector] public ItemType fitType = ItemType.powder;
     [HideInInspector] public ItemType downType = ItemType.smoke;
     [HideInInspector] public ItemType upType = ItemType.syringe;
+
+    [HideInInspector] public bool isLife = true;
 
     private float poisoned; //약기운
     private float tolerance; //내성
     private float health; //체력 
 
+    private ICharacterBuff buff;
     // Use this for initialization
     void Start () {
         Transform ui = GameObject.FindGameObjectWithTag("UiPanel").transform;
@@ -46,12 +56,15 @@ public class PlayerState : MonoBehaviour {
         poisonedBar.transform.localPosition = new Vector3(-(Screen.width ) + stateBarX, -(Screen.height) + stateBarY * 5);
         toleranceBar.transform.localPosition = new Vector3(-(Screen.width / 2) + stateBarX, -(Screen.height / 2) + stateBarY * 3);
         healthBar.transform.localPosition = new Vector3(-(Screen.width / 2) + stateBarX, -(Screen.height / 2) + stateBarY * 1);
+       
+        healthBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(255 / 255, 0, 0);
         */
-        //healthBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(255 / 255, 0, 0);
-        healthBar.transform.GetChild(2).GetComponent<Text>().text = "채력";
+
+        healthBar.transform.GetChild(2).GetComponent<Text>().text = "체력";
         toleranceBar.transform.GetChild(2).GetComponent<Text>().text = "내성";
         poisonedBar.transform.GetChild(2).GetComponent<Text>().text = "약기운";
 
+        buff = (ICharacterBuff)characterBuff;
 
         InitValue();
     }
@@ -61,8 +74,16 @@ public class PlayerState : MonoBehaviour {
         poisoned -= Time.deltaTime * poisenedPerSedond;
         health -= Time.deltaTime * healthPerSecond;
 
+        // 나중에 바꿀 계획
+        //if (poisoned < 0.1f)
+        //    health -= Time.deltaTime * healthPerSecond * 2;
+
+        CheckLife();
+
         poisoned = Mathf.Max(0, poisoned);
         health = Mathf.Max(0, health);
+
+        CheckBuff();
 	}
     void FixedUpdate()
     {
@@ -76,8 +97,35 @@ public class PlayerState : MonoBehaviour {
         health = initHealth;
         tolerance = initTolerance;
         poisoned = initPoisoned;
+
+        isLife = true;
     }
 
+    void CheckLife()
+    {
+        if(health <= 0.0f)
+        {
+            isLife = false;
+        }
+            
+    }
+
+    void CheckBuff()
+    {
+        if(poisoned < debuffPoint)
+        {
+            buff.GetDebuff((debuffPoint - poisoned) / debuffPoint);
+        }
+        else if(poisoned < buffPoint)
+        {
+            buff.ResetBuff();
+        }
+        else
+        {
+            buff.GetBuff((buffPoint - poisoned) / (100 - buffPoint));
+        }
+
+    }
     public void UseDrug(ItemType type)
     {
         if(type == fitType)

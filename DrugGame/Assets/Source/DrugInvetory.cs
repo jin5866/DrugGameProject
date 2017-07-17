@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerState))]
 public class DrugInvetory : MonoBehaviour {
+    public GameManager gameManager;
+
     public GameObject uiPanel;
 
     public int invenSize = 3;
@@ -15,6 +17,7 @@ public class DrugInvetory : MonoBehaviour {
 
     public int DrugMinNum = 1;
     public int DrugMaxNum = 3;
+    public int initDrugNum = 1;
 
     public Transform drugButton;
 
@@ -39,18 +42,22 @@ public class DrugInvetory : MonoBehaviour {
         for(int i=0;i < invenSize;i++)
         {
             inven[i].type = (ItemType)(i);
-            inven[i].num = 0;
+            inven[i].num = initDrugNum;
+
             //Transform tmp = Instantiate(drugButton,uiPanel.transform);
             //tmp.SetParent(uiPanel.transform);
+            /*
             button[i].transform.position = drugButtonPos.position + (
                 new Vector3(
                     -Mathf.Cos((float)i / (invenSize - 1) * 90) * drugButtonDis
                     , Mathf.Sin((float)i / (invenSize - 1) * 90) * drugButtonDis
                     )
                 );
+                */
             //텍스트 가져오기
+
             itemCounter[i] = button[i].transform.GetChild(0).GetComponent<Text>();
-            itemCounter[i].text = "0";
+            itemCounter[i].text = "" + initDrugNum;
 
             /*
             button[i] = tmp.GetComponent<Button>();
@@ -72,6 +79,7 @@ public class DrugInvetory : MonoBehaviour {
 
     public bool GetDrug()
     {
+        gameManager.GetDrug();
         return GetDrug(UnityEngine.Random.Range(DrugMinNum, DrugMaxNum + 1));
     }
 

@@ -934,6 +934,7 @@ GameObject:
   - component: {fileID: 114997035996077540}
   - component: {fileID: 114505237252514956}
   - component: {fileID: 114014686651674856}
+  - component: {fileID: 114550291917298442}
   m_Layer: 0
   m_Name: unitychan
   m_TagString: Player
@@ -4554,7 +4555,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1735713281389856}
-  m_LocalRotation: {x: -0.09374654, y: 0.6978552, z: 0.70746905, w: 0.060806714}
+  m_LocalRotation: {x: -0.09374654, y: 0.6978552, z: 0.70746905, w: 0.060806707}
   m_LocalPosition: {x: -0.05543403, y: 0.0017306843, z: 0.098653734}
   m_LocalScale: {x: 1.0000004, y: 1.0000006, z: 1.0000005}
   m_Children:
@@ -5186,9 +5187,13 @@ MonoBehaviour:
   poisonedBar: {fileID: 0}
   toleranceBar: {fileID: 0}
   healthBar: {fileID: 0}
+  debuffPoint: 30
+  buffPoint: 70
+  characterBuff: {fileID: 114550291917298442}
   fitType: 0
   downType: 2
   upType: 1
+  isLife: 1
 --- !u!114 &114429303879242094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5200,6 +5205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4984e37989b3354db209c539c2f71ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   uiPanel: {fileID: 0}
   invenSize: 3
   maxInvenNum: 99
@@ -5229,6 +5235,21 @@ MonoBehaviour:
   backSpeed: 3
   rotSpeed: 3
   chaMover: {fileID: 114997035996077540}
+--- !u!114 &114550291917298442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1326052889291496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7e5f6371d33c44fa9ab3f25545d6aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapManager: {fileID: 0}
+  uiPanel: {fileID: 0}
+  maxFade: 0.33
+  ghostMaxNum: 5
 --- !u!114 &114997035996077540
 MonoBehaviour:
   m_ObjectHideFlags: 1
