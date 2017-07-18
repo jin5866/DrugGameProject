@@ -213,16 +213,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4fd1ef7fd25044784ef9952387ab5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 793576520}
   mapPosY: 0
   mapBlock:
   - {fileID: 4000012050177740, guid: 70edf5590429b9c4a989cac7775dc9ad, type: 2}
   npc:
   - {fileID: 4927962408153876, guid: 08bd47d512aba784ea99128813e3ce8b, type: 2}
-  genTime: 10
-  blockList: []
+  drugGenTime: 10
+  potionGenTime: 10
   mapSIze: 10
   initDrug: 100
+  initPotion: 20
   blockSize: 30
+  blockList: []
 --- !u!1001 &273168347
 Prefab:
   m_ObjectHideFlags: 0
@@ -262,16 +265,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114550291917298442, guid: dd57fef19dbeb4948b31df98952b20e7,
-        type: 2}
-      propertyPath: mapManager
-      value: 
-      objectReference: {fileID: 266313564}
-    - target: {fileID: 114550291917298442, guid: dd57fef19dbeb4948b31df98952b20e7,
-        type: 2}
-      propertyPath: uiPanel
-      value: 
-      objectReference: {fileID: 1328690679}
     - target: {fileID: 114014686651674856, guid: dd57fef19dbeb4948b31df98952b20e7,
         type: 2}
       propertyPath: poisonedBar
@@ -287,22 +280,16 @@ Prefab:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 451754245}
-    - target: {fileID: 4799242163997288, guid: dd57fef19dbeb4948b31df98952b20e7, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0.09374654
-      objectReference: {fileID: 0}
-    - target: {fileID: 4799242163997288, guid: dd57fef19dbeb4948b31df98952b20e7, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.6978552
-      objectReference: {fileID: 0}
-    - target: {fileID: 4799242163997288, guid: dd57fef19dbeb4948b31df98952b20e7, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.70746905
-      objectReference: {fileID: 0}
-    - target: {fileID: 4799242163997288, guid: dd57fef19dbeb4948b31df98952b20e7, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.060806707
-      objectReference: {fileID: 0}
+    - target: {fileID: 114550291917298442, guid: dd57fef19dbeb4948b31df98952b20e7,
+        type: 2}
+      propertyPath: mapManager
+      value: 
+      objectReference: {fileID: 266313564}
+    - target: {fileID: 114550291917298442, guid: dd57fef19dbeb4948b31df98952b20e7,
+        type: 2}
+      propertyPath: uiPanel
+      value: 
+      objectReference: {fileID: 1328690679}
     - target: {fileID: 114429303879242094, guid: dd57fef19dbeb4948b31df98952b20e7,
         type: 2}
       propertyPath: gameManager
