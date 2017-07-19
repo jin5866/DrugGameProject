@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.6.2f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -84,6 +86,7 @@
     <Compile Include="Assets\Source\DrugType.cs" />
     <Compile Include="Assets\Source\Interface\ICharacterBuff.cs" />
     <Compile Include="Assets\Source\Interface\ICharacterMover.cs" />
+    <Compile Include="Assets\Source\Interface\INPCAction.cs" />
     <Compile Include="Assets\Source\Manager\GameManager.cs" />
     <Compile Include="Assets\Source\Manager\MapManager.cs" />
     <Compile Include="Assets\Source\Manager\MenuManager.cs" />
@@ -91,8 +94,9 @@
     <Compile Include="Assets\Source\Map\DrugObj.cs" />
     <Compile Include="Assets\Source\Map\GenPosition.cs" />
     <Compile Include="Assets\Source\Map\HealthPotion.cs" />
+    <Compile Include="Assets\Source\NPC\GhostAction.cs" />
     <Compile Include="Assets\Source\NPC\NPC.cs" />
-    <Compile Include="Assets\Source\NPC\PlayerFollower.cs" />
+    <Compile Include="Assets\Source\NPC\NPCControl.cs" />
     <Compile Include="Assets\Source\Player\DrugInvetory.cs" />
     <Compile Include="Assets\Source\Player\PlayerControl.cs" />
     <Compile Include="Assets\Source\Player\PlayerState.cs" />
@@ -111,6 +115,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Chibi Mummy\readme.txt" />
+    <None Include="Assets\Toon Death Knight Pack\Toon Death Knight\Read me.txt" />
+    <None Include="Assets\Toon Death Knight Pack\Toon Ghost\Read me.txt" />
     <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
     <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
     <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />

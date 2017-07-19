@@ -19,6 +19,9 @@ public class MapManager : MonoBehaviour {
 
     public float mapPosY = 0.0f;
     public Transform[] mapBlock;
+    public Transform[] feverMapBlock;
+
+    public float feverMapHight = 50f;
 
     public Transform[] npc;
 
@@ -40,13 +43,17 @@ public class MapManager : MonoBehaviour {
     private Transform player;
 
     [HideInInspector] public List<GameObject> blockList;
+    [HideInInspector] public List<GameObject> feverBlockList;
     [HideInInspector] private bool isPlaying;
+
+    public bool isFever;
 
 	// Use this for initialization
 	void Start () {
         isPlaying = true;
 
         blockList = new List<GameObject>();
+        feverBlockList = new List<GameObject>();
         drugGenList = new List<GenPosition>();
         NPCList = new List<GameObject>();
         potionGenList = new List<GenPosition>();
@@ -69,6 +76,8 @@ public class MapManager : MonoBehaviour {
             {
                 GameObject newBlock = CreateOneBlock();
                 newBlock.transform.position = new Vector3(i * blockSize, mapPosY, j * blockSize);
+                GameObject newFeverBlock = CreateOneFeverBlock();
+                newFeverBlock.transform.position = new Vector3(i * blockSize, feverMapHight, j * blockSize);
             }
         }
 
@@ -84,6 +93,8 @@ public class MapManager : MonoBehaviour {
 
         StartCoroutine(GenDrugRoutine());
         StartCoroutine(GenPotionRoutine());
+
+        isFever = false;
     }
     public GameObject CreateOneNPC(int a)
     {
@@ -97,7 +108,7 @@ public class MapManager : MonoBehaviour {
     {
         foreach (var i in NPCList)
         {
-            Destroy(i);
+            i.GetComponent<NPCControl>().controler.Die();
         }
         NPCList.Clear();
     }
@@ -126,7 +137,42 @@ public class MapManager : MonoBehaviour {
         return b;
     }
 
+   private GameObject CreateOneFeverBlock()
+    {
+        Transform a = feverMapBlock[Random.Range(0, feverMapBlock.Length)];
+        GameObject b = Instantiate(a).gameObject;
+        feverBlockList.Add(b);
+
+        /* 마약과 포션 젠 여부는 결정되지 않음.
+        int childNum = b.transform.GetChildCount();
+
+        for (int i = 0; i < childNum; i++)
+        {
+            Transform tmp = b.transform.GetChild(i);
+            if (tmp.tag == "DrugGen")
+            {
+                drugGenList.Add(tmp.gameObject.GetComponent<GenPosition>());
+            }
+            else if (tmp.tag == "PotionGen")
+            {
+                potionGenList.Add(tmp.gameObject.GetComponent<GenPosition>());
+            }
+        }
+        */
+
+        return b;
+    }
+
     
+
+    public void FEVERMap(bool afterDie)
+    {
+        if(!isFever)
+        {
+            player.position += Vector3.up * feverMapHight;
+            isFever = true;
+        }
+    }
 
     public void GenNewDrug()
     {
@@ -171,10 +217,15 @@ public class MapManager : MonoBehaviour {
         {
             Destroy(i);
         }
+        foreach(var i in feverBlockList)
+        {
+            Destroy(i);
+        }
         foreach(var i in NPCList)
         {
             Destroy(i);
         }
+
         blockList.Clear();
         drugGenList.Clear();
         NPCList.Clear();

@@ -19,6 +19,10 @@ public class UIManager : MonoBehaviour {
 
     public UnityAction defaultAction;
 
+    public Text rightUpText;
+
+    [HideInInspector] public bool isFever;
+
     private Text text;
     private Button OKButton;
 
@@ -35,6 +39,7 @@ public class UIManager : MonoBehaviour {
 
         defaultAction = DefaultAction;
 
+        rightUpText.text = "";
     }
 
     // Update is called once per frame
@@ -61,11 +66,27 @@ public class UIManager : MonoBehaviour {
         text.text = message;
     }
 
-
+    public void FEVER(bool set)
+    {
+        isFever = true;
+        rightUpText.color = Color.red;
+        StartCoroutine(FeverAlarm());
+    }
     private void AlarmReset()
     {
         text.text = "";
         OKButton.onClick.RemoveAllListeners();
     }
     
+
+    IEnumerator FeverAlarm()
+    {
+        while(isFever)
+        {
+            rightUpText.text = "FEVER";
+            yield return new WaitForSeconds(0.5f);
+            rightUpText.text = "";
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
 }

@@ -85,5 +85,9 @@ public class GameManager : MonoBehaviour {
         score += scorePerDrug;
     }
 
+    public void FEVER(bool afterDead)
+    {
+        scorePerSecond *= 10;
+    }
 
 }

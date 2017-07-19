@@ -19,6 +19,10 @@ public class PlayerState : MonoBehaviour {
     public float poisenedPerSedond = 5.0f;
     public float tolerancePerPill = 0.3f;
 
+    public float upDrugPoisened = 90f;
+    public float fitDrugPoisened = 25f;
+    public float downDrugPoisened = 3f;
+
     public int stateBarX = 450;
     public int stateBarY = -50;
 
@@ -38,6 +42,9 @@ public class PlayerState : MonoBehaviour {
 
     public float HealPerPotion = 30.0f;
 
+    public MapManager mapManager;
+    public UIManager uiMnanger;
+
     [HideInInspector] public ItemType fitType = ItemType.powder;
     [HideInInspector] public ItemType downType = ItemType.smoke;
     [HideInInspector] public ItemType upType = ItemType.syringe;
@@ -49,6 +56,8 @@ public class PlayerState : MonoBehaviour {
     private float health; //체력 
 
     private ICharacterBuff buff;
+
+    private bool isFever;
     // Use this for initialization
     void Start () {
         Transform ui = GameObject.FindGameObjectWithTag("UiPanel").transform;
@@ -72,6 +81,8 @@ public class PlayerState : MonoBehaviour {
         buff = (ICharacterBuff)characterBuff;
 
         InitValue();
+
+      
     }
 	
 	// Update is called once per frame
@@ -85,10 +96,18 @@ public class PlayerState : MonoBehaviour {
 
         CheckLife();
 
+        if(poisoned >= 97f && !isFever)
+        {
+            FEVER(true);
+        }
+
         poisoned = Mathf.Max(0, poisoned);
         health = Mathf.Max(0, health);
 
         CheckBuff();
+
+        
+
 	}
     void FixedUpdate()
     {
@@ -104,6 +123,7 @@ public class PlayerState : MonoBehaviour {
         poisoned = initPoisoned;
 
         isLife = true;
+        isFever = false;
     }
 
     void CheckLife()
@@ -131,12 +151,24 @@ public class PlayerState : MonoBehaviour {
         }
 
     }
+    
+    public void FEVER(bool isDead)
+    {
+        isFever = true;
+        healthPerSecond *= 3;
+
+        mapManager.FEVERMap(isDead);
+        mapManager.gameManager.FEVER(isDead);
+        uiMnanger.FEVER(true);
+    }
+
     public void UseDrug(ItemType type)
     {
+        //차차 조정해갑시다.
         if(type == fitType)
         {
             tolerance += tolerancePerPill;
-            poisoned += 20.0f;
+            poisoned += (fitDrugPoisened * ((maxPoint - tolerance) / maxPoint));
         }
         else if( type == upType)
         {
@@ -146,7 +178,7 @@ public class PlayerState : MonoBehaviour {
         else if(type == downType)
         {
             tolerance += tolerancePerPill;
-            poisoned += 3.0f;
+            poisoned += (downDrugPoisened * ((maxPoint - tolerance) / maxPoint));
         }
         else
         {
@@ -169,5 +201,10 @@ public class PlayerState : MonoBehaviour {
     {
         health += HealPerPotion * w;
         health = Mathf.Min(health, maxPoint);
+    }
+
+    public void GetDamage(float d)
+    {
+        health -= d;
     }
 }

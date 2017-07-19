@@ -30,20 +30,37 @@ public class UnityChanBuff : MonoBehaviour,ICharacterBuff {
 
     private Color origColor;
 
+    private bool isBuffed;
+    private bool isDebuffed;
+
     public void GetBuff(float degree)
     {
         //디버프 없애기
-        mapManager.ResetNPC();
-        nowGhost = 0;
-        uiPanel.color = origColor;
+        if(isDebuffed)
+        {
+            mapManager.ResetNPC();
+            nowGhost = 0;
+            uiPanel.color = origColor;
+            isDebuffed = false;
+        }
+
         //버프
-        control.maxSpeed = 1.3f * origSpeed;
+        control.maxSpeed = origSpeed * (1f + 0.5f * degree);
+        Time.timeScale = 1 / (1f + 0.5f * degree);
+        isBuffed = true;
     }
 
     public void GetDebuff(float degree)
     {
         //버프 업애기
-        control.maxSpeed = origSpeed;
+        if(isBuffed)
+        {
+            Time.timeScale = 1;
+            control.maxSpeed = origSpeed;
+            isBuffed = false;
+        }
+
+        
 
         //디버프
         if (nowGhost < (int)(degree*ghostMaxNum))
@@ -53,22 +70,35 @@ public class UnityChanBuff : MonoBehaviour,ICharacterBuff {
         }
         //움직이는 숨쉬는 속도가 처음엔 pi()/4초마다 한번 나중엔 그 두배
         uiPanel.color = new Color(origColor.r, origColor.g, origColor.b, maxFade * (degree + fadeBreath * Mathf.Sin(Time.time * 8 * Mathf.Max(degree, 0.5f))));
+        isDebuffed = true;
     }
     public void ResetBuff()
     {
         //디버프 없애기
-        mapManager.ResetNPC();
-        nowGhost = 0;
-        uiPanel.color = origColor;
+        if(isDebuffed)
+        {
+            mapManager.ResetNPC();
+            nowGhost = 0;
+            uiPanel.color = origColor;
+            isDebuffed = false;
+        }
+
 
         //버프 없애기
-        control.maxSpeed = origSpeed;
+        if(isBuffed)
+        {
+            Time.timeScale = 1;
+            control.maxSpeed = origSpeed;
+            isBuffed = false;
+        }
     }
 
 
 
     // Use this for initialization
     void Start () {
+        
+
         control = GetComponent<PlayerControl>();
         origSpeed = control.maxSpeed;
         origColor = uiPanel.color;

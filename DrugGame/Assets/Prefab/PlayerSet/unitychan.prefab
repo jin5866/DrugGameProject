@@ -5184,6 +5184,9 @@ MonoBehaviour:
   healthPerSecond: 1
   poisenedPerSedond: 3
   tolerancePerPill: 0.3
+  upDrugPoisened: 90
+  fitDrugPoisened: 25
+  downDrugPoisened: 3
   stateBarX: 450
   stateBarY: -50
   stateBar: {fileID: 224584020943830404, guid: 322b8433a48175d498847dac662c2f89, type: 2}
@@ -5194,6 +5197,8 @@ MonoBehaviour:
   buffPoint: 70
   characterBuff: {fileID: 114550291917298442}
   HealPerPotion: 30
+  mapManager: {fileID: 0}
+  uiMnanger: {fileID: 0}
   fitType: 0
   downType: 2
   upType: 1
