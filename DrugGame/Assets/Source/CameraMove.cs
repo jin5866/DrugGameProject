@@ -46,7 +46,7 @@ public class CameraMove : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //플레이어 찾기
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
 
 
         xRotateDegree = defaultXRotate;
@@ -58,15 +58,22 @@ public class CameraMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(player == null)
-            player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        //update마다 계산
+
+	}
+
+    void FixedUpdate()
+    {
+        if (player == null)
+            player = GameManager.player;
+
+        //일정시간 마다 계산
         SetCameraPos();
 
         //캐릭터를 약간 느리게 따라다님
         target = player.position + cameraPos;
-        if(moveBuffer)
+
+        if (moveBuffer)
         {
             transform.position = Vector3.Lerp(transform.position, target, moveRate);
         }
@@ -75,8 +82,7 @@ public class CameraMove : MonoBehaviour {
             transform.position = target;
         }
         transform.LookAt(player);
-
-	}
+    }
 
     public void CameraRotate(Vector2 move)
     {

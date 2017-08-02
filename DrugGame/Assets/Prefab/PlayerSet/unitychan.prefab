@@ -937,6 +937,7 @@ GameObject:
   - component: {fileID: 114550291917298442}
   - component: {fileID: 114542186407306824}
   - component: {fileID: 212943590457817682}
+  - component: {fileID: 82414371921851696}
   m_Layer: 0
   m_Name: unitychan
   m_TagString: Player
@@ -5148,6 +5149,86 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!82 &82414371921851696
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1326052889291496}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95768264729560142
 Animator:
   serializedVersion: 3
@@ -5190,15 +5271,10 @@ MonoBehaviour:
   stateBarX: 450
   stateBarY: -50
   stateBar: {fileID: 224584020943830404, guid: 322b8433a48175d498847dac662c2f89, type: 2}
-  poisonedBar: {fileID: 0}
-  toleranceBar: {fileID: 0}
-  healthBar: {fileID: 0}
   debuffPoint: 30
   buffPoint: 70
   characterBuff: {fileID: 114550291917298442}
   HealPerPotion: 30
-  mapManager: {fileID: 0}
-  uiMnanger: {fileID: 0}
   fitType: 0
   downType: 2
   upType: 1
@@ -5214,7 +5290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4984e37989b3354db209c539c2f71ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   uiPanel: {fileID: 0}
   invenSize: 3
   maxInvenNum: 99
@@ -5241,7 +5316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 1
-  maxSpeed: 10
+  maxSpeed: 15
   backSpeed: 3
   rotSpeed: 3
   chaMover: {fileID: 114997035996077540}
@@ -5269,8 +5344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7e5f6371d33c44fa9ab3f25545d6aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapManager: {fileID: 0}
-  uiPanel: {fileID: 0}
   maxFade: 0.5
   fadeBreath: 0.2
   ghostMaxNum: 5

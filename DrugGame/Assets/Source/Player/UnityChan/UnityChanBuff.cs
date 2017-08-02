@@ -14,14 +14,15 @@ using UnityEngine.UI;
  */ 
 public class UnityChanBuff : MonoBehaviour,ICharacterBuff {
 
-
-    public MapManager mapManager;
-    public Image uiPanel;
+    private Image uiPanel;
 
     public float maxFade = 0.5f;
     public float fadeBreath = 0.15f;
 
     public int ghostMaxNum = 5;
+
+    private MapManager mapManager;
+    private GameManager gameManager;
 
     private int nowGhost = 0;
 
@@ -32,9 +33,12 @@ public class UnityChanBuff : MonoBehaviour,ICharacterBuff {
 
     private bool isBuffed;
     private bool isDebuffed;
-
+    
     public void GetBuff(float degree)
     {
+        if (gameManager.isPaused)
+            return;
+
         //디버프 없애기
         if(isDebuffed)
         {
@@ -46,14 +50,17 @@ public class UnityChanBuff : MonoBehaviour,ICharacterBuff {
 
         //버프
         control.maxSpeed = origSpeed * (1f + 0.5f * degree);
-        Time.timeScale = 1 / (1f + 0.5f * degree);
+        Time.timeScale = 1 / (1f + 0.8f * degree);
         isBuffed = true;
     }
 
     public void GetDebuff(float degree)
     {
+        if (gameManager.isPaused)
+            return;
+
         //버프 업애기
-        if(isBuffed)
+        if (isBuffed)
         {
             Time.timeScale = 1;
             control.maxSpeed = origSpeed;
@@ -68,14 +75,18 @@ public class UnityChanBuff : MonoBehaviour,ICharacterBuff {
             mapManager.CreateOneNPC(0);
             nowGhost++;
         }
+
         //움직이는 숨쉬는 속도가 처음엔 pi()/4초마다 한번 나중엔 그 두배
         uiPanel.color = new Color(origColor.r, origColor.g, origColor.b, maxFade * (degree + fadeBreath * Mathf.Sin(Time.time * 8 * Mathf.Max(degree, 0.5f))));
         isDebuffed = true;
     }
     public void ResetBuff()
     {
+        if (gameManager.isPaused)
+            return;
+
         //디버프 없애기
-        if(isDebuffed)
+        if (isDebuffed)
         {
             mapManager.ResetNPC();
             nowGhost = 0;
@@ -97,7 +108,9 @@ public class UnityChanBuff : MonoBehaviour,ICharacterBuff {
 
     // Use this for initialization
     void Start () {
-        
+        mapManager = GameManager.mapManager;
+        uiPanel = GameManager.uiManager.uiPanel;
+        gameManager = GameManager.gameManager;
 
         control = GetComponent<PlayerControl>();
         origSpeed = control.maxSpeed;

@@ -16,7 +16,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerState))]
 public class DrugInvetory : MonoBehaviour {
-    public GameManager gameManager;
+    
 
     public GameObject uiPanel;
 
@@ -35,6 +35,8 @@ public class DrugInvetory : MonoBehaviour {
 
     public Button[] button;
 
+    private GameManager gameManager;
+
     private int lastDrug = Enum.GetValues(typeof(ItemType)).Length;
     private Inven[] inven;
     private Text[] itemCounter;
@@ -43,6 +45,9 @@ public class DrugInvetory : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
+        button = GameManager.uiManager.drugButton;
+        gameManager = GameManager.gameManager;
+
         inven = new Inven[invenSize];
         //button = new Button[invenSize];
         itemCounter = new Text[invenSize];
@@ -67,14 +72,14 @@ public class DrugInvetory : MonoBehaviour {
             itemCounter[i] = button[i].transform.GetChild(0).GetComponent<Text>();
             itemCounter[i].text = "" + initDrugNum;
 
-            /*
-            button[i] = tmp.GetComponent<Button>();
-            button[i].onClick.AddListener(
-                () => { UseDrug((ItemType)i); }
-            );
+            
+            
             //button[i].onClick.
-            */
+            
         }
+
+
+        SetButtonAction();
 
 
         playerState = GetComponent<PlayerState>();
@@ -170,7 +175,22 @@ public class DrugInvetory : MonoBehaviour {
         }
     }
 
-
+    private void SetButtonAction()
+    {
+        /*
+         * 버튼 수만큼 만들어야 함
+         * for문을 돌리면 i 가 마지막 횟수 + 1로 고정되버림.
+         */
+        button[0].onClick.AddListener(
+                () => { UseDrug(0); }
+            );
+        button[1].onClick.AddListener(
+                () => { UseDrug(1); }
+            );
+        button[2].onClick.AddListener(
+                () => { UseDrug(2); }
+            );
+    }
     //인벤토리에서 한칸 한칸
     private struct Inven
     {

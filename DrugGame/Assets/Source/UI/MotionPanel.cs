@@ -11,11 +11,16 @@ using UnityEngine.EventSystems;
  */ 
 public class MotionPanel : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    Vector2 beforePos;
+    private bool isAvtive;
+
+    private Vector2 beforePos;
     private CameraMove _camera;
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isAvtive)
+            return;
+
         Vector2 movePos = eventData.position - beforePos;
         _camera.CameraRotate(movePos);
         beforePos = eventData.position;
@@ -23,18 +28,39 @@ public class MotionPanel : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoin
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (!isAvtive)
+            return;
+
         beforePos = eventData.position;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (!isAvtive)
+            return;
+
         beforePos = Vector2.zero;
+    }
+
+    public bool active
+    {
+        set
+        {
+            isAvtive = value;
+        }
+
+        private get
+        {
+            return isAvtive;
+        }
     }
 
     // Use this for initialization
     void Start () {
         beforePos = Vector2.zero;
         _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMove>();
+
+        isAvtive = true;
 	}
 	
 	// Update is called once per frame

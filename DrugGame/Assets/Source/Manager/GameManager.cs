@@ -13,6 +13,11 @@ using UnityEngine.UI;
  */ 
 
 public class GameManager : MonoBehaviour {
+    public static GameManager gameManager { get; private set; }
+    public static UIManager uiManager { get; private set; }
+    public static MapManager mapManager { get; private set; }
+
+
     public string GameOverString = "앙 쥬금";
 
     public Text scoreText;
@@ -24,19 +29,49 @@ public class GameManager : MonoBehaviour {
     [HideInInspector] public bool isPlaying = true;
 
     private PlayerState playerState;
-    private UIManager uiManager;
+
 
     private float score;
 
-	// Use this for initialization
-	void Start () {
-        playerState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerState>();
-        uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+    private static Transform _player;
+
+    public AudioSource BGM;
+    public AudioClip normal; //일반 배경음
+    public AudioClip america; //fever 배경음
+
+    [HideInInspector] public bool isPaused { get; private set; }
+
+    public static Transform player
+    {
+        private set
+        {
+            _player = value;
+        }
+
+        get
+        {
+            if (_player == null)
+                _player = GameObject.FindGameObjectWithTag("Player").transform;
+
+            return _player;
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
+        playerState = player.GetComponent<PlayerState>();
         isPlaying = true;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Awake()
+    {
+        uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        mapManager = GameObject.FindGameObjectWithTag("MapManager").GetComponent<MapManager>();
+        gameManager = this;
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (!isPlaying)
             return;
 
@@ -65,8 +100,8 @@ public class GameManager : MonoBehaviour {
 
     bool GameOverCheck()
     {
-        if(playerState == null)
-            playerState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerState>();
+        if (playerState == null)
+            playerState = GameManager.player.GetComponent<PlayerState>();
 
         if (!playerState.isLife)
         {
@@ -88,6 +123,30 @@ public class GameManager : MonoBehaviour {
     public void FEVER(bool afterDead)
     {
         scorePerSecond *= 10;
+
+        //BGM audioclip을 미국브금으로 맞춘후, 새로 틈
+        //TODO : Fever가 끝날 때 원래 브금(normal)으로 다시 맞추어 줘야 함
+        BGM.clip = america;
+        BGM.Play();
     }
+
+    public void Pause(bool set)
+    {
+        if(set)
+        {
+            //멈추기
+            Time.timeScale = 0f;
+            isPaused = true;
+        }
+        else
+        {
+            //다시 시작
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
+
+        uiManager.SetControlActive(!set);
+    }
+
 
 }

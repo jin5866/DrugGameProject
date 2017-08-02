@@ -12,6 +12,8 @@ TagManager:
   - GameManager
   - Block
   - PotionGen
+  - MapManager
+  - PlayerGen
   layers:
   - Default
   - TransparentFX

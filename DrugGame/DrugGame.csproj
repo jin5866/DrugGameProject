@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.6.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -82,6 +80,8 @@
   <ItemGroup>
     <Compile Include="Assets\Chibi Mummy\Misc\Scripts\CharMovement.cs" />
     <Compile Include="Assets\Chibi Mummy\Misc\Scripts\buttonControl_script.cs" />
+    <Compile Include="Assets\Menu.cs" />
+    <Compile Include="Assets\Restarter.cs" />
     <Compile Include="Assets\Source\CameraMove.cs" />
     <Compile Include="Assets\Source\DrugType.cs" />
     <Compile Include="Assets\Source\Interface\ICharacterBuff.cs" />
@@ -90,6 +90,7 @@
     <Compile Include="Assets\Source\Manager\GameManager.cs" />
     <Compile Include="Assets\Source\Manager\MapManager.cs" />
     <Compile Include="Assets\Source\Manager\MenuManager.cs" />
+    <Compile Include="Assets\Source\Manager\PlaySetting.cs" />
     <Compile Include="Assets\Source\Manager\UIManager.cs" />
     <Compile Include="Assets\Source\Map\DrugObj.cs" />
     <Compile Include="Assets\Source\Map\GenPosition.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Source\NPC\GhostAction.cs" />
     <Compile Include="Assets\Source\NPC\NPC.cs" />
     <Compile Include="Assets\Source\NPC\NPCControl.cs" />
+    <Compile Include="Assets\Source\NPC\PoliceAction.cs" />
     <Compile Include="Assets\Source\Player\DrugInvetory.cs" />
     <Compile Include="Assets\Source\Player\PlayerControl.cs" />
     <Compile Include="Assets\Source\Player\PlayerState.cs" />

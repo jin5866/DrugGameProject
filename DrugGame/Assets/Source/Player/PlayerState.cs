@@ -29,9 +29,9 @@ public class PlayerState : MonoBehaviour {
     public Transform stateBar;
     //public Transform uiPanel;
 
-    public Slider poisonedBar;
-    public Slider toleranceBar;
-    public Slider healthBar;
+    private Slider poisonedBar;
+    private Slider toleranceBar;
+    private Slider healthBar;
 
     public float debuffPoint = 30f;
     public float buffPoint = 70f;
@@ -42,8 +42,8 @@ public class PlayerState : MonoBehaviour {
 
     public float HealPerPotion = 30.0f;
 
-    public MapManager mapManager;
-    public UIManager uiMnanger;
+    private MapManager mapManager;
+    private UIManager uiMnanger;
 
     [HideInInspector] public ItemType fitType = ItemType.powder;
     [HideInInspector] public ItemType downType = ItemType.smoke;
@@ -60,7 +60,14 @@ public class PlayerState : MonoBehaviour {
     private bool isFever;
     // Use this for initialization
     void Start () {
-        Transform ui = GameObject.FindGameObjectWithTag("UiPanel").transform;
+        mapManager = GameManager.mapManager;
+        uiMnanger = GameManager.uiManager;
+
+        poisonedBar = uiMnanger.poisonedBar;
+        toleranceBar = uiMnanger.toleranceBar;
+        healthBar = uiMnanger.healthBar;
+
+        Transform ui = uiMnanger.uiPanel.transform;
 
         /*
         poisonedBar = Instantiate(stateBar, ui).GetComponent<Slider>();
@@ -82,7 +89,6 @@ public class PlayerState : MonoBehaviour {
 
         InitValue();
 
-      
     }
 	
 	// Update is called once per frame
@@ -96,10 +102,15 @@ public class PlayerState : MonoBehaviour {
 
         CheckLife();
 
+
         if(poisoned >= 97f && !isFever)
         {
             FEVER(true);
         }
+
+        //Fever시 약기운 Max
+        if (isFever)
+            poisoned = maxPoint;
 
         poisoned = Mathf.Max(0, poisoned);
         health = Mathf.Max(0, health);
@@ -113,7 +124,12 @@ public class PlayerState : MonoBehaviour {
     {
         poisonedBar.value = poisoned / stateValueMax;
         toleranceBar.value = tolerance / stateValueMax;
-        healthBar.value = health / stateValueMax;
+
+        //Fever시 health 값과 달리 UI상 표기는 Max로 고정
+        if (isFever)
+            healthBar.value = 1;
+        else
+            healthBar.value = health / stateValueMax;
     }
 
     void InitValue()
@@ -130,7 +146,11 @@ public class PlayerState : MonoBehaviour {
     {
         if(health <= 0.0f)
         {
+            //죽음
             isLife = false;
+
+            //조정 불가.
+            GameManager.uiManager.SetControlActive(false);
         }
             
     }
@@ -157,8 +177,8 @@ public class PlayerState : MonoBehaviour {
         isFever = true;
         healthPerSecond *= 3;
 
-        mapManager.FEVERMap(isDead);
-        mapManager.gameManager.FEVER(isDead);
+        mapManager.FEVER(isDead);
+        GameManager.gameManager.FEVER(isDead);
         uiMnanger.FEVER(true);
     }
 
@@ -206,5 +226,10 @@ public class PlayerState : MonoBehaviour {
     public void GetDamage(float d)
     {
         health -= d;
+    }
+
+    public float getPoisoned()
+    {
+        return poisoned;
     }
 }

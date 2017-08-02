@@ -12,6 +12,8 @@ using System;
 */
 public class JoyStick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPointerDownHandler {
 
+    public bool isActive;
+
     private Image bgImg;
     private RawImage joystick;
     private Vector3 inputVector;
@@ -24,6 +26,7 @@ public class JoyStick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPointerDow
         joystick = transform.GetChild(0).GetComponent<RawImage>();
         origPos = joystick.rectTransform.anchoredPosition;
 
+        isActive = true;
     }
 	
 	// Update is called once per frame
@@ -34,6 +37,9 @@ public class JoyStick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPointerDow
     //인터페이스 구현
     public void OnDrag(PointerEventData ped)
     {
+        if (!isActive)
+            return;
+
         Vector2 pos;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(bgImg.rectTransform, ped.position, ped.pressEventCamera, out pos))
         {
@@ -57,6 +63,9 @@ public class JoyStick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPointerDow
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (!isActive)
+            return;
+
         inputVector = Vector3.zero;
         joystick.rectTransform.anchoredPosition = origPos;
     }
@@ -64,11 +73,17 @@ public class JoyStick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPointerDow
 
     public float GetHorizontalValue()
     {
+        if (!isActive)
+            return 0;
+
         return inputVector.x;
     }
 
     public float GetVerticalValue()
     {
+        if (!isActive)
+            return 0;
+
         return inputVector.y;
     }    
     

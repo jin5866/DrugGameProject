@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Source.Manager;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,10 +11,12 @@ using UnityEngine.SceneManagement;
  * 
  */ 
 public class MenuManager : MonoBehaviour {
+    public int defaultCharacter = 0;
+
 
 	// Use this for initialization
 	void Start () {
-		
+        PlaySetting.playerCha = defaultCharacter;
 	}
 	
 	// Update is called once per frame

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Assets.Source.Manager;
 
 /*
  * 2017-07-04 jin5866
@@ -15,32 +16,37 @@ using UnityEngine.UI;
 
 public class MapManager : MonoBehaviour {
 
-    public GameManager gameManager;
+    public static GameManager gameManager { get; private set; }
+    public static UIManager uiManager { get; private set; }
+    public static MapManager mapManager { get; private set; }
 
     public float mapPosY = 0.0f;
+    public Transform[] startBlock;
     public Transform[] mapBlock;
     public Transform[] feverMapBlock;
 
     public float feverMapHight = 50f;
 
     public Transform[] npc;
-
+    public Transform[] playerPreFab;
+    
     public float drugGenTime = 10.0f;
     public float potionGenTime = 10.0f;
 
     
 
-    public int mapSIze = 10;
+    public int mapSize = 10;
     public int initDrug = 100;
     public int initPotion = 20;
 
-    public float blockSize = 30;
+    public float blockSizeX = 200;
+    public float blockSizeZ = 100;
 
     private List<GenPosition> drugGenList;
     private List<GameObject> NPCList;
     private List<GenPosition> potionGenList;
 
-    private Transform player;
+    [HideInInspector] public Transform player { get; private set; }
 
     [HideInInspector] public List<GameObject> blockList;
     [HideInInspector] public List<GameObject> feverBlockList;
@@ -50,6 +56,10 @@ public class MapManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        mapManager = this;
+        uiManager = GameManager.uiManager;
+        gameManager = GameManager.gameManager;
+
         isPlaying = true;
 
         blockList = new List<GameObject>();
@@ -57,8 +67,6 @@ public class MapManager : MonoBehaviour {
         drugGenList = new List<GenPosition>();
         NPCList = new List<GameObject>();
         potionGenList = new List<GenPosition>();
-
-        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         CreateInitMap();
 	}
@@ -70,17 +78,21 @@ public class MapManager : MonoBehaviour {
 
     public void CreateInitMap()
     {
-        for (int i = -mapSIze; i <= mapSIze; i++) 
+        for (int i = -mapSize; i <= mapSize; i++) 
         {
-            for (int j = -mapSIze; j <= mapSIze; j++)
+            for (int j = -mapSize; j <= mapSize * (blockSizeX / blockSizeZ); j++) 
             {
-                GameObject newBlock = CreateOneBlock();
-                newBlock.transform.position = new Vector3(i * blockSize, mapPosY, j * blockSize);
+                GameObject newBlock = CreateOneBlock(i == 0 && j == 0);
+                newBlock.transform.position = new Vector3(i * blockSizeX, mapPosY, j * blockSizeZ);
                 GameObject newFeverBlock = CreateOneFeverBlock();
-                newFeverBlock.transform.position = new Vector3(i * blockSize, feverMapHight, j * blockSize);
+                newFeverBlock.transform.position = new Vector3(i * blockSizeX, feverMapHight, j * blockSizeZ);
             }
         }
 
+        //플레이어 소환.
+        GenPlayer();
+
+        //적당한 갯수만큼 약 소환.
         for (int i=0;i<initDrug;i++)
         {
             GenNewDrug();
@@ -91,6 +103,7 @@ public class MapManager : MonoBehaviour {
             GenNewPotion();
         }
 
+        //약과 포션 젠
         StartCoroutine(GenDrugRoutine());
         StartCoroutine(GenPotionRoutine());
 
@@ -113,9 +126,19 @@ public class MapManager : MonoBehaviour {
         NPCList.Clear();
     }
 
-    private GameObject CreateOneBlock()
+    private GameObject CreateOneBlock(bool isStartPoint)
     {
-        Transform a = mapBlock[Random.Range(0, mapBlock.Length)];
+        Transform a;
+
+        if (!isStartPoint)
+        {
+            a = mapBlock[Random.Range(0, mapBlock.Length)];
+        }
+        else
+        {
+            a = startBlock[Random.Range(0, startBlock.Length)];
+        }
+
         GameObject b = Instantiate(a).gameObject;
 
         blockList.Add(b);
@@ -126,7 +149,13 @@ public class MapManager : MonoBehaviour {
             Transform tmp = b.transform.GetChild(i);
             if (tmp.tag == "DrugGen")
             {
-                drugGenList.Add(tmp.gameObject.GetComponent<GenPosition>());
+                GenPosition gp = tmp.gameObject.GetComponent<GenPosition>();
+                drugGenList.Add(gp);
+
+                if(isStartPoint)
+                {
+                    gp.GenItem();
+                }
             }
             else if(tmp.tag == "PotionGen")
             {
@@ -137,7 +166,7 @@ public class MapManager : MonoBehaviour {
         return b;
     }
 
-   private GameObject CreateOneFeverBlock()
+    private GameObject CreateOneFeverBlock()
     {
         Transform a = feverMapBlock[Random.Range(0, feverMapBlock.Length)];
         GameObject b = Instantiate(a).gameObject;
@@ -163,9 +192,17 @@ public class MapManager : MonoBehaviour {
         return b;
     }
 
-    
+    private void GenPlayer()
+    {
+        
+        Transform genPos = GameObject.FindGameObjectWithTag("PlayerGen").transform;
 
-    public void FEVERMap(bool afterDie)
+        //나중에 세팅에 맞게 수정
+        player = Instantiate(playerPreFab[PlaySetting.playerCha]);
+        player.position = genPos.position;
+    }
+
+    public void FEVER(bool afterDie)
     {
         if(!isFever)
         {
@@ -225,6 +262,8 @@ public class MapManager : MonoBehaviour {
         {
             Destroy(i);
         }
+        Destroy(player);
+        player = null;
 
         blockList.Clear();
         drugGenList.Clear();

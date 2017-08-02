@@ -56,6 +56,7 @@ public class UnityChanMover : MonoBehaviour,ICharacterMover {
     public void Move(float h, float v)
     {
         float speed = Mathf.Pow(h * h + v * v, 0.5f);
+
         if(speed > 0.1f)
         {
             anim.SetFloat("Speed", speed);                                             
@@ -66,6 +67,8 @@ public class UnityChanMover : MonoBehaviour,ICharacterMover {
 
             transform.rotation = Quaternion.LookRotation(lookDir);
             transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
+
+            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         }
         else
         {

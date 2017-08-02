@@ -31,7 +31,7 @@ public class NPCControl : MonoBehaviour {
     public float attackDamage = 10.0f;
 
     private GameObject m_Player;
-    private Transform playersPosition;
+    private Transform player;
 
     private float velocity;
 
@@ -46,13 +46,13 @@ public class NPCControl : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        m_Player = GameObject.FindGameObjectWithTag("Player");
+        m_Player = GameManager.player.gameObject;
         velocity = 0;
         target = new Vector3(m_Player.transform.position.x, 0, m_Player.transform.position.z);
         //transform.LookAt(target);
 
-        playersPosition = GameObject.FindGameObjectWithTag("Player").transform;
-        playerState = playersPosition.GetComponent<PlayerState>();
+        player = GameManager.player;
+        playerState = player.GetComponent<PlayerState>();
         controler = (INPCAction)npcControler;
 
         isAttackAble = true;
@@ -61,7 +61,7 @@ public class NPCControl : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        target = new Vector3(m_Player.transform.position.x, 0, m_Player.transform.position.z);
+        target = player.position;
         StartCoroutine(SetTarget());
         TurnToTarget();
         GoForward();
@@ -70,7 +70,7 @@ public class NPCControl : MonoBehaviour {
             controler.Move(GoForward(), TurnToTarget());
         }
 
-        if (Vector3.Distance(playersPosition.position, transform.position) <= attackDistance)
+        if ((Mathf.Pow(transform.position.x - player.position.x, 2f) + Mathf.Pow(transform.position.z - player.position.z, 2f)) <= attackDistance * attackDistance) 
         {
             if(isAttackAble)
             {
