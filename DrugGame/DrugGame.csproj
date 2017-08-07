@@ -78,8 +78,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CharacterSelecter.cs" />
     <Compile Include="Assets\Chibi Mummy\Misc\Scripts\CharMovement.cs" />
     <Compile Include="Assets\Chibi Mummy\Misc\Scripts\buttonControl_script.cs" />
+    <Compile Include="Assets\DeathKinghtBuff.cs" />
+    <Compile Include="Assets\DeathKnightMover.cs" />
     <Compile Include="Assets\Menu.cs" />
     <Compile Include="Assets\Restarter.cs" />
     <Compile Include="Assets\Source\CameraMove.cs" />

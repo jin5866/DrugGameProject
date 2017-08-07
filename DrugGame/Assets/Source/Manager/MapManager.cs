@@ -33,7 +33,8 @@ public class MapManager : MonoBehaviour {
     public float drugGenTime = 10.0f;
     public float potionGenTime = 10.0f;
 
-    
+    public int[] specialBlockNum;
+    public int specialBlockRatio = 10;
 
     public int mapSize = 10;
     public int initDrug = 100;
@@ -132,7 +133,33 @@ public class MapManager : MonoBehaviour {
 
         if (!isStartPoint)
         {
-            a = mapBlock[Random.Range(0, mapBlock.Length)];
+            int tmp= 0;
+            bool passable = false;
+
+            while(!passable)
+            {
+                tmp = Random.Range(0, mapBlock.Length);
+                passable = true;
+                foreach (var i in specialBlockNum)
+                {
+                    if (i == tmp)
+                    {
+                        if(Random.Range(0,100) < specialBlockRatio)
+                        {
+                            //스페셜 블럭 생성
+                            passable = true;
+                        }
+                        else
+                        {
+                            //생성 취소.
+                            passable = false;
+                        }
+                        break;
+                    }
+                }
+            }
+            
+            a = mapBlock[tmp];
         }
         else
         {
@@ -197,7 +224,7 @@ public class MapManager : MonoBehaviour {
         
         Transform genPos = GameObject.FindGameObjectWithTag("PlayerGen").transform;
 
-        //나중에 세팅에 맞게 수정
+        //세팅에 맞게 소환
         player = Instantiate(playerPreFab[PlaySetting.playerCha]);
         player.position = genPos.position;
     }

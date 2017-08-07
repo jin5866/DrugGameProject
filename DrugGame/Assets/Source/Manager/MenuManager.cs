@@ -11,12 +11,10 @@ using UnityEngine.SceneManagement;
  * 
  */ 
 public class MenuManager : MonoBehaviour {
-    public int defaultCharacter = 0;
 
 
 	// Use this for initialization
 	void Start () {
-        PlaySetting.playerCha = defaultCharacter;
 	}
 	
 	// Update is called once per frame
@@ -28,5 +26,10 @@ public class MenuManager : MonoBehaviour {
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("_main_game");
+    }
+
+    public void CharacterSetting()
+    {
+        SceneManager.LoadScene("_character_setting");
     }
 }

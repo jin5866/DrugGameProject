@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/PolygonCity/Scenes/Demo.unity
+- path: Assets/Asset/_main_game.unity
   isLoaded: 1
   isActive: 1

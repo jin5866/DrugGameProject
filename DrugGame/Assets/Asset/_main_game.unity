@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9424fdce8fec58f42ac811b32be6f322, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -262,9 +262,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapPosY: 0
   startBlock:
-  - {fileID: 4626345525477948, guid: fc959c48655c234479119037637b7387, type: 2}
+  - {fileID: 4582766101355592, guid: a464300f2eff99f4ba6e1e28fd7304a9, type: 2}
   mapBlock:
   - {fileID: 4659029556170224, guid: a9f0467a2c942d74d8dc217164915b4f, type: 2}
+  - {fileID: 4165866185227044, guid: 578e1e2ff67f415448c69416a79c2e09, type: 2}
+  - {fileID: 4358232781535602, guid: 7a86c81db3e30394f834dd4123c8ddf9, type: 2}
+  - {fileID: 4443901131642050, guid: bb16843e907d0e1429d15c38964da307, type: 2}
+  - {fileID: 4113069080882610, guid: cc17130b9a111a3428f435c8de716731, type: 2}
   feverMapBlock:
   - {fileID: 4022071523691996, guid: f7a53a0f999792242a2182d69cd1aa6c, type: 2}
   feverMapHight: 100
@@ -272,10 +276,13 @@ MonoBehaviour:
   - {fileID: 4238802126846196, guid: 65d20b88e2722ee44a60f6668f2a2bde, type: 2}
   playerPreFab:
   - {fileID: 4944060926110914, guid: dd57fef19dbeb4948b31df98952b20e7, type: 2}
+  - {fileID: 4647345630150814, guid: 64d6c50b29cda4e41a20cd75f494c259, type: 2}
   drugGenTime: 2
   potionGenTime: 3
+  specialBlockNum: 0200000003000000
+  specialBlockRatio: 10
   mapSize: 10
-  initDrug: 200
+  initDrug: 400
   initPotion: 40
   blockSizeX: 200
   blockSizeZ: 100

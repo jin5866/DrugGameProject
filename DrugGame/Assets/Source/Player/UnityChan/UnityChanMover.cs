@@ -63,12 +63,13 @@ public class UnityChanMover : MonoBehaviour,ICharacterMover {
             anim.speed = animSpeed;                             
             currentBaseState = anim.GetCurrentAnimatorStateInfo(0); 
 
+            //보는방향으로 돌며 움직이기.
             lookDir = camMove.playerForward.normalized * v + camMove.playerRight.normalized * h;
-
             transform.rotation = Quaternion.LookRotation(lookDir);
-            transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * forwardSpeed * speed * Time.deltaTime);
 
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            //y값을 0으로 고정
+            //transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         }
         else
         {

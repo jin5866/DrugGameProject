@@ -124,10 +124,18 @@ public class GameManager : MonoBehaviour {
     {
         scorePerSecond *= 10;
 
-        //BGM audioclip을 미국브금으로 맞춘후, 새로 틈
-        //TODO : Fever가 끝날 때 원래 브금(normal)으로 다시 맞추어 줘야 함
-        BGM.clip = america;
-        BGM.Play();
+
+        try
+        {
+            //BGM audioclip을 미국브금으로 맞춘후, 새로 틈
+            //TODO : Fever가 끝날 때 원래 브금(normal)으로 다시 맞추어 줘야 함
+            BGM.clip = america;
+            BGM.Play();
+        }
+        catch
+        {
+
+        }
     }
 
     public void Pause(bool set)
@@ -137,6 +145,7 @@ public class GameManager : MonoBehaviour {
             //멈추기
             Time.timeScale = 0f;
             isPaused = true;
+            
         }
         else
         {
@@ -144,6 +153,8 @@ public class GameManager : MonoBehaviour {
             Time.timeScale = 1f;
             isPaused = false;
         }
+
+        player.GetComponent<PlayerControl>().isPaused = set;
 
         uiManager.SetControlActive(!set);
     }

@@ -19,6 +19,9 @@ public class PlayerControl : MonoBehaviour {
     private JoyStick joyStick;
     private ICharacterMover mover;
 
+
+    [HideInInspector] public bool isPaused = false;
+
 	// Use this for initialization
 	void Start () {
         joyStick = GameObject.FindGameObjectWithTag("JoyStick").GetComponent<JoyStick>();
@@ -27,6 +30,9 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (isPaused)
+            return;
+
         //조이스틱 입력값.
         float h = joyStick.GetHorizontalValue();             
         float v = joyStick.GetVerticalValue();

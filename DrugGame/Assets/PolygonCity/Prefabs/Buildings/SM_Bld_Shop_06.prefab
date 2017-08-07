@@ -10,6 +10,7 @@ GameObject:
   - component: {fileID: 481430}
   - component: {fileID: 3301052}
   - component: {fileID: 2382568}
+  - component: {fileID: 65131874457425478}
   m_Layer: 0
   m_Name: SM_Bld_Shop_06
   m_TagString: Untagged
@@ -80,3 +81,15 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 113012}
   m_IsPrefabParent: 1
+--- !u!65 &65131874457425478
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.1752625, y: 3.0000005, z: 5.8767266}
+  m_Center: {x: -2.5, y: 1.5000002, z: -2.1492717}

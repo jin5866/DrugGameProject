@@ -689,6 +689,10 @@ GameObject:
   m_Component:
   - component: {fileID: 451078}
   - component: {fileID: 9564250}
+  - component: {fileID: 114298091779914758}
+  - component: {fileID: 114416364283378972}
+  - component: {fileID: 114011745664634440}
+  - component: {fileID: 114401503875620990}
   m_Layer: 0
   m_Name: Toon Death Knight-Blue
   m_TagString: Untagged
@@ -1029,7 +1033,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 162442}
-  m_LocalRotation: {x: 0.71122646, y: 0.7028482, z: -0.0074100643, w: 0.010324803}
+  m_LocalRotation: {x: 0.71122646, y: 0.7028482, z: -0.0074100625, w: 0.010324803}
   m_LocalPosition: {x: -0.068068825, y: -0.086726665, z: -0.0070245373}
   m_LocalScale: {x: 0.9999999, y: 1.0000001, z: 1.0000004}
   m_Children:
@@ -1086,7 +1090,7 @@ Transform:
   m_GameObject: {fileID: 199904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 413888}
   - {fileID: 493768}
@@ -4638,3 +4642,85 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 199904}
   m_IsPrefabParent: 1
+--- !u!114 &114011745664634440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4984e37989b3354db209c539c2f71ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiPanel: {fileID: 0}
+  invenSize: 3
+  maxInvenNum: 99
+  DrugMinNum: 1
+  DrugMaxNum: 3
+  initDrugNum: 1
+  drugButton: {fileID: 0}
+  drugButtonDis: 100
+  drugButtonPos: {fileID: 0}
+  button: []
+--- !u!114 &114298091779914758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33076a7f739ccf4c920dab9acc107ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNum: 1
+  maxSpeed: 15
+  backSpeed: 3
+  rotSpeed: 10
+  chaMover: {fileID: 114401503875620990}
+  isPaused: 0
+--- !u!114 &114401503875620990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46244ca9f3d85e8439ad2624712ece8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114416364283378972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a01dd2669e414854486091304a2da1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPoint: 100
+  initPoisoned: 50
+  initTolerance: 0
+  initHealth: 100
+  stateValueMax: 100
+  healthPerSecond: 1
+  poisenedPerSedond: 5
+  tolerancePerPill: 0.3
+  upDrugPoisened: 90
+  fitDrugPoisened: 25
+  downDrugPoisened: 3
+  stateBarX: 450
+  stateBarY: -50
+  stateBar: {fileID: 0}
+  debuffPoint: 30
+  buffPoint: 70
+  characterBuff: {fileID: 0}
+  HealPerPotion: 30
+  fitType: 0
+  downType: 2
+  upType: 1
+  isLife: 1
