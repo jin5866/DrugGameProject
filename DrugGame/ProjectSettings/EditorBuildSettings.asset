@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Asset/_character_setting.unity
     guid: b189adb1e68def749975ee18152f144b
+  - enabled: 1
+    path: Assets/Asset/_game_over.unity
+    guid: 7d975153beb2b984c98daa052944a040

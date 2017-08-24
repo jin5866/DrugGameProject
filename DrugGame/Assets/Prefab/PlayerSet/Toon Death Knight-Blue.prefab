@@ -1105,7 +1105,7 @@ Transform:
   m_GameObject: {fileID: 1362983311312454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 4737323563494106}
   - {fileID: 4110997513394014}
@@ -1496,7 +1496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 1
-  maxSpeed: 15
+  maxSpeed: 20
   backSpeed: 3
   rotSpeed: 10
   chaMover: {fileID: 114003971068578094}

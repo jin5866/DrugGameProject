@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Source.Manager;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -34,12 +35,16 @@ public class UIManager : MonoBehaviour {
     public JoyStick joyStick;
     public MotionPanel motionPanel;
 
+    public Button menu;
+
+    public string[] startMess;
+    
     [HideInInspector] public bool isFever;
 
     private Text text;
     private Button OKButton;
 
-
+    private int startMessCounter = 0;
 
     void Start()
     {
@@ -57,6 +62,11 @@ public class UIManager : MonoBehaviour {
         defaultAction = DefaultAction;
 
         rightUpText.text = "";
+        if(PlaySetting.startMess)
+        {
+            StartMessage();
+            PlaySetting.startMess = false;
+        }
     }
 
     // Update is called once per frame
@@ -67,6 +77,7 @@ public class UIManager : MonoBehaviour {
     public void DefaultAction()
     {
         alarm.gameObject.SetActive(false);
+        GameManager.gameManager.Pause(false);
     }
 
     public void Alarm(string message)
@@ -78,6 +89,7 @@ public class UIManager : MonoBehaviour {
     {
         AlarmReset();
         alarm.gameObject.SetActive(true);
+        GameManager.gameManager.Pause(true);
         OKButton.onClick.AddListener(DefaultAction);
         OKButton.onClick.AddListener(a);
         text.text = message;
@@ -102,6 +114,8 @@ public class UIManager : MonoBehaviour {
         }
         //모션 패널
         motionPanel.active = set;
+
+        menu.interactable = set;
     }
     private void AlarmReset()
     {
@@ -119,5 +133,17 @@ public class UIManager : MonoBehaviour {
             rightUpText.text = "";
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    private void StartMessage()
+    {
+        if(startMess.Length<= startMessCounter)
+        {
+            return;
+        }
+
+        Alarm(startMess[startMessCounter], delegate { StartMessage(); });
+
+        startMessCounter++;
     }
 }

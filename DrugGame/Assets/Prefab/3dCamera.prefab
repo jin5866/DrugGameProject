@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c94525224aeb6489f9295660a587a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDistance: 26.457514
+  cameraDistance: 40
   moveRate: 0.1
   xRotatePerSize: 20000
   YRotatePerSize: 20000
@@ -113,7 +113,7 @@ MonoBehaviour:
   defaultYRotate: 65
   YRotateMin: 20
   YRotateMax: 85
-  moveBuffer: 1
+  moveBuffer: 0
   cameraPos: {x: 0, y: 0, z: 0}
   playerForward: {x: 0, y: 0, z: 0}
   playerRight: {x: 0, y: 0, z: 0}

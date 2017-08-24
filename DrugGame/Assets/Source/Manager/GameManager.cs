@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour {
     public static UIManager uiManager { get; private set; }
     public static MapManager mapManager { get; private set; }
 
+    public int moneyPerCoin = 100;
+    public int pointPerMoney = 100;
+
 
     public string GameOverString = "앙 쥬금";
 
@@ -39,7 +42,16 @@ public class GameManager : MonoBehaviour {
     public AudioClip normal; //일반 배경음
     public AudioClip america; //fever 배경음
 
+    public int coin = 0;
+    public float playTime = 0;
+
     [HideInInspector] public bool isPaused { get; private set; }
+
+    private int pauseCounter;
+
+    private bool isFever = false;
+
+    public PoliceAction[] policeList;
 
     public static Transform player
     {
@@ -51,7 +63,17 @@ public class GameManager : MonoBehaviour {
         get
         {
             if (_player == null)
-                _player = GameObject.FindGameObjectWithTag("Player").transform;
+            {
+                try
+                {
+                    _player = GameObject.FindGameObjectWithTag("Player").transform;
+                }
+                catch
+                {
+                    _player = null;
+                }
+            }
+                
 
             return _player;
         }
@@ -59,6 +81,12 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        _player = null;
+
+        uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        mapManager = GameObject.FindGameObjectWithTag("MapManager").GetComponent<MapManager>();
+        gameManager = this;
+
         playerState = player.GetComponent<PlayerState>();
         isPlaying = true;
 	}
@@ -72,6 +100,8 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        playTime += Time.unscaledDeltaTime;
+
         if (!isPlaying)
             return;
 
@@ -84,6 +114,10 @@ public class GameManager : MonoBehaviour {
             score += scorePerSecond * Time.deltaTime;
             scoreText.text = "" + (int)score;
         }
+        foreach(var p in policeList)
+        {
+            p.gameObject.SetActive(Vector3.Distance(p.transform.position, player.transform.position) <= 100);
+        }
     }
 
     void GameOver()
@@ -95,7 +129,15 @@ public class GameManager : MonoBehaviour {
 
     public void GameOverAction()
     {
-        SceneManager.LoadScene("_main_menu");
+        DataManager.inst.coin = coin;
+        DataManager.inst.savedCoin += coin * moneyPerCoin;
+        DataManager.inst.savedCoin += (int)score / pointPerMoney; 
+        DataManager.inst.playTime = playTime;
+        DataManager.inst.totalPlayTime += playTime;
+        DataManager.inst.point = (int)score;
+        DataManager.inst.highestPoint = Mathf.Max((int)score, DataManager.inst.highestPoint);
+        DataManager.inst.Save();
+        SceneManager.LoadScene("_game_over");
     }
 
     bool GameOverCheck()
@@ -120,11 +162,17 @@ public class GameManager : MonoBehaviour {
         score += scorePerDrug;
     }
 
+    public void getCoin()
+    {
+        coin++;
+    }
+
+
     public void FEVER(bool afterDead)
     {
         scorePerSecond *= 10;
-
-
+        isFever = true;
+        StartCoroutine(Rainbow());
         try
         {
             //BGM audioclip을 미국브금으로 맞춘후, 새로 틈
@@ -139,6 +187,24 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Pause(bool set)
+    {
+        if(set)
+        {
+            pauseCounter++;
+            _Pause(true);
+        }
+        else
+        {
+            pauseCounter--;
+            if(pauseCounter <= 0)
+            {
+                _Pause(false);
+            }
+        }
+    }
+
+
+    private void _Pause(bool set)
     {
         if(set)
         {
@@ -159,5 +225,73 @@ public class GameManager : MonoBehaviour {
         uiManager.SetControlActive(!set);
     }
 
+    IEnumerator Rainbow()
+    {
+        Renderer[] renderers = player.GetComponentsInChildren<Renderer>();
+        List<Material> materials = new List<Material>();
+        foreach (var ren in renderers)
+        {
+            materials.Add(ren.material);
+        }
+        List<Color> originalColor = new List<Color>();
 
+        foreach (var mat in materials)
+        {
+            originalColor.Add(mat.color);
+        }
+
+        while (isFever)
+        {
+            foreach (var mat in materials)
+            {
+                mat.color = new Color(1, 0, 0);
+            }
+            for (int i = 0; i < 6; ++i)
+            {
+                foreach (var mat in materials)
+                {
+                    mat.color += (Color.yellow - Color.red) / 6;
+                }
+                yield return new WaitForSeconds(1 / 60f);
+            }
+            for (int i = 0; i < 6; ++i)
+            {
+                foreach (var mat in materials)
+                {
+                    mat.color += (Color.green - Color.yellow) / 6;
+                }
+                yield return new WaitForSeconds(1 / 60f);
+            }
+            for (int i = 0; i < 6; ++i)
+            {
+                foreach (var mat in materials)
+                {
+                    mat.color += (Color.blue - Color.green) / 6;
+                }
+                yield return new WaitForSeconds(1 / 60f);
+            }
+            for (int i = 0; i < 6; ++i)
+            {
+                foreach (var mat in materials)
+                {
+                    mat.color += (Color.magenta - Color.blue) / 6;
+                }
+                yield return new WaitForSeconds(1 / 60f);
+            }
+            for (int i = 0; i < 6; ++i)
+            {
+                foreach (var mat in materials)
+                {
+                    mat.color += (Color.red - Color.magenta) / 6;
+                }
+                yield return new WaitForSeconds(1 / 60f);
+            }
+            yield return new WaitForSeconds(1 / 60f);
+        }
+
+        for (int i = 0; i < materials.Count; ++i)
+        {
+            materials[i].color = originalColor[i];
+        }
+    }
 }

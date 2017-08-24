@@ -34,8 +34,11 @@ public class GenPosition : MonoBehaviour {
         isItem = true;
         GameObject a = Instantiate(item).gameObject;
 
+        if (tag == "CoinGen")
+            transform.position += new Vector3(0, 5, 0);
+
         a.transform.SetParent(transform);
-        a.transform.localPosition = Vector3.up;
+        a.transform.localPosition = Vector3.zero;
 
         return true;
     }

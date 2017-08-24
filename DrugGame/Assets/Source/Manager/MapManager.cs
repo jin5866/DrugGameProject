@@ -32,6 +32,7 @@ public class MapManager : MonoBehaviour {
     
     public float drugGenTime = 10.0f;
     public float potionGenTime = 10.0f;
+    public float coinGenTime = 10.0f;
 
     public int[] specialBlockNum;
     public int specialBlockRatio = 10;
@@ -39,6 +40,7 @@ public class MapManager : MonoBehaviour {
     public int mapSize = 10;
     public int initDrug = 100;
     public int initPotion = 20;
+    public int initCoin = 200;
 
     public float blockSizeX = 200;
     public float blockSizeZ = 100;
@@ -46,6 +48,7 @@ public class MapManager : MonoBehaviour {
     private List<GenPosition> drugGenList;
     private List<GameObject> NPCList;
     private List<GenPosition> potionGenList;
+    private List<GenPosition> coinGenList;
 
     [HideInInspector] public Transform player { get; private set; }
 
@@ -68,6 +71,7 @@ public class MapManager : MonoBehaviour {
         drugGenList = new List<GenPosition>();
         NPCList = new List<GameObject>();
         potionGenList = new List<GenPosition>();
+        coinGenList = new List<GenPosition>();
 
         CreateInitMap();
 	}
@@ -104,9 +108,17 @@ public class MapManager : MonoBehaviour {
             GenNewPotion();
         }
 
+        for (int i = 0; i < initCoin; ++i)
+        {
+            GenNewCoin();
+        }
+
+        gameManager.policeList = FindObjectsOfType<PoliceAction>();
+
         //약과 포션 젠
         StartCoroutine(GenDrugRoutine());
         StartCoroutine(GenPotionRoutine());
+        StartCoroutine(GenCoinRoutine());
 
         isFever = false;
     }
@@ -169,7 +181,7 @@ public class MapManager : MonoBehaviour {
         GameObject b = Instantiate(a).gameObject;
 
         blockList.Add(b);
-        int childNum = b.transform.GetChildCount();
+        int childNum = b.transform.childCount;
 
         for (int i = 0; i < childNum ; i++) 
         {
@@ -187,6 +199,10 @@ public class MapManager : MonoBehaviour {
             else if(tmp.tag == "PotionGen")
             {
                 potionGenList.Add(tmp.gameObject.GetComponent<GenPosition>());
+            }
+            else if(tmp.tag == "CoinGen")
+            {
+                coinGenList.Add(tmp.gameObject.GetComponent<GenPosition>());
             }
         }
 
@@ -275,6 +291,23 @@ public class MapManager : MonoBehaviour {
         
     }
 
+    public void GenNewCoin()
+    {
+        if (coinGenList.Count == 0)
+            return;
+        GenPosition a = coinGenList[Random.Range(0, coinGenList.Count)];
+        int count = 0;
+        while (!a.GenItem())
+        {
+            a = potionGenList[Random.Range(0, potionGenList.Count)];
+            count++;
+            if (count > 100)
+            {
+                return;
+            }
+        }
+    }
+
     public void NewMap()
     {
         foreach(var i in blockList)
@@ -313,6 +346,15 @@ public class MapManager : MonoBehaviour {
         {
             GenNewPotion();
             yield return new WaitForSeconds(potionGenTime);
+        }
+    }
+
+    IEnumerator GenCoinRoutine()
+    {
+        while (isPlaying)
+        {
+            GenNewCoin();
+            yield return new WaitForSeconds(coinGenTime);
         }
     }
 }

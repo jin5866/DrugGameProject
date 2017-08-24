@@ -78,23 +78,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AliceBuff.cs" />
+    <Compile Include="Assets\AliceGirl\Scripts\characterButton.cs" />
+    <Compile Include="Assets\AliceMover.cs" />
     <Compile Include="Assets\CharacterSelecter.cs" />
     <Compile Include="Assets\Chibi Mummy\Misc\Scripts\CharMovement.cs" />
     <Compile Include="Assets\Chibi Mummy\Misc\Scripts\buttonControl_script.cs" />
     <Compile Include="Assets\DeathKinghtBuff.cs" />
     <Compile Include="Assets\DeathKnightMover.cs" />
     <Compile Include="Assets\Menu.cs" />
+    <Compile Include="Assets\OverManager.cs" />
     <Compile Include="Assets\Restarter.cs" />
     <Compile Include="Assets\Source\CameraMove.cs" />
     <Compile Include="Assets\Source\DrugType.cs" />
     <Compile Include="Assets\Source\Interface\ICharacterBuff.cs" />
     <Compile Include="Assets\Source\Interface\ICharacterMover.cs" />
     <Compile Include="Assets\Source\Interface\INPCAction.cs" />
+    <Compile Include="Assets\Source\Manager\DataManager.cs" />
     <Compile Include="Assets\Source\Manager\GameManager.cs" />
     <Compile Include="Assets\Source\Manager\MapManager.cs" />
     <Compile Include="Assets\Source\Manager\MenuManager.cs" />
     <Compile Include="Assets\Source\Manager\PlaySetting.cs" />
     <Compile Include="Assets\Source\Manager\UIManager.cs" />
+    <Compile Include="Assets\Source\Map\Coin.cs" />
     <Compile Include="Assets\Source\Map\DrugObj.cs" />
     <Compile Include="Assets\Source\Map\GenPosition.cs" />
     <Compile Include="Assets\Source\Map\HealthPotion.cs" />
@@ -117,9 +123,14 @@
     <Compile Include="Assets\UnityChan\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\UnityChan\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
+    <Compile Include="Assets\fpsAction.cs" />
+    <Compile Include="Assets\fpsBuff.cs" />
+    <Compile Include="Assets\fpsMover.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\AliceGirl\Shader\Unlit_2Side.shader" />
     <None Include="Assets\Chibi Mummy\readme.txt" />
+    <None Include="Assets\HorseMask2017\Materials\SFB_StandardHair.shader" />
     <None Include="Assets\Toon Death Knight Pack\Toon Death Knight\Read me.txt" />
     <None Include="Assets\Toon Death Knight Pack\Toon Ghost\Read me.txt" />
     <None Include="Assets\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
