@@ -70,6 +70,7 @@ public class CharacterSelecter : MonoBehaviour {
         if(prices[a] <= DataManager.inst.savedCoin)
         {
             DataManager.inst.characterUnlock[a] = true;
+            DataManager.inst.savedCoin -= prices[a];
             DataManager.inst.Save();
         }
         else
